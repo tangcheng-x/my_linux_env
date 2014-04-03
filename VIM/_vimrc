@@ -1,0 +1,80 @@
+if(has("win32") || has("win95") || has("win64") || has("win16")) "判定当前操作系统类型
+    let g:iswindows=1
+else
+    let g:iswindows=0
+endif
+autocmd BufEnter * lcd %:p:h
+
+set nocompatible
+syntax on
+if has("autocmd")
+    filetype plugin indent on
+    augroup vimrcEx
+        au!
+        autocmd FileType text setlocal textwidth=78
+        autocmd BufReadPost *
+                    \ if line("'\"") > 1 && line("'\"") <= line("$") |
+                    \ exe "normal! g`\"" |
+                    \ endif
+    augroup END
+endif " has("autocmd")
+set shiftwidth=2
+set expandtab
+set vb t_vb=
+
+filetype plugin on
+
+set nowrap
+set hlsearch
+set incsearch
+set backspace=indent,eol,start whichwrap+=<,>,[,]
+if(g:iswindows==1)
+    if has('mouse')
+        set mouse=a
+    endif
+    au GUIEnter * simalt ~x
+endif
+
+set go=
+
+color desert
+
+set background=light
+
+set nu
+
+set nocp
+
+"TlistUpdate可以更新tags
+map <F3> :silent! Tlist<CR> "按下F3就可以呼出了
+let Tlist_Ctags_Cmd='ctags' "因为我们放在环境变量里，所以可以直接执行
+let Tlist_Use_Right_Window=1 "让窗口显示在右边，0的话就是显示在左边
+let Tlist_Show_One_File=0 "让taglist可以同时展示多个文件的函数列表，如果想只有1个，设置为1
+let Tlist_File_Fold_Auto_Close=1 "非当前文件，函数列表折叠隐藏
+let Tlist_Exit_OnlyWindow=1 "当taglist是最后一个分割窗口时，自动推出vim
+let Tlist_Process_File_Always=0 "是否一直处理tags.1:处理;0:不处理。不是一直实时更新tags，因为没有必要
+let Tlist_Inc_Winwidth=0
+
+map <C-F12> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
+
+set laststatus=2
+set statusline =
+set statusline+=%2*%-3.3n%0*\ 
+set statusline+=%f\ " 
+set statusline+=%h%1*%m%r%w%0*
+set statusline+=[ 
+if v:version >= 600 
+  set statusline+=%{strlen(&ft)?&ft:'none'}, " filetype 
+  set statusline+=%{&fileencoding}, " encoding 
+endif 
+set statusline+=%{&fileformat}] " file format 
+set statusline+=%= " right align 
+"set statusline+=%2*0x%-8B\ " current char 
+set statusline+=0x%-8B\ " current char 
+set statusline+=%-14.(%l,%c%V%)\ %<%P " offset 
+if filereadable(expand("$VIM/vimfiles/plugin/vimbuddy.vim")) 
+  set statusline+=\ %{VimBuddy()} " vim buddy 
+endif
+
+highlight StatusLine guifg=SlateBlue guibg=Yellow 
+"highlight StatusLineNC guifg=Gray guibg=White
