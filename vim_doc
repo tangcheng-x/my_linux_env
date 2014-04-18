@@ -1,0 +1,8 @@
+Comment multiple raws
+=====================
+
+1. Enter esc into command mode
+2. Enter Ctrl+v into virtual block mode
+3. Enter j+k or "Up"+"Down" to select code which will be commented
+4. Enter I and Enter the "//" or "#" and so on
+5. Enter esc and wait for moment
