@@ -54,4 +54,5 @@ ibus-setup
 read CONTIUNE
 echo -e "5) These input method settings can be effective after log out."
 
-
+# Support system clipboard
+sudo apt-get install vim-gnome

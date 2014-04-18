@@ -89,4 +89,4 @@ set smartcase
 " Ignore case when searching
 set ignorecase
 
-
+set noswapfile
