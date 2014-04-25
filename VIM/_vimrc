@@ -90,3 +90,13 @@ set smartcase
 set ignorecase
 
 set noswapfile
+
+let mapleader = ','
+nnoremap <C-l> gt
+nnoremap <C-h> gT
+nnoremap <leader>t : tabe<CR>
+
+call pathogen#infect()
+
+nnoremap <F4> :NERDTree<CR>
+
